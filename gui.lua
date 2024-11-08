@@ -8,17 +8,18 @@ local Window = Fluent:CreateWindow({
     TabWidth = 160,
     Size = UDim2.fromOffset(880, 560),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Amethyst",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.RightControl -- Used when theres no MinimizeKeybind
 })
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Key System", Icon = "key-round" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
-
 local Options = Fluent.Options
+
+-- Select the "Main" tab
+Window:SelectTab("Main")
 
 do
     Fluent:Notify({
@@ -31,7 +32,7 @@ do
 
     Tabs.Main:AddParagraph({
         Title = "Prestine Key Checking System",
-        Content = "If your seeing this, you dont have a key, press the button below to copy the discord link to get your key"
+        Content = "Join the discord and do .genKey in #cmd to use this script"
     })
 
 
@@ -42,12 +43,12 @@ do
         Callback = function()
             Window:Dialog({
                 Title = "",
-                Content = "This is a dialog",
+                Content = "Would you like to copy the link to your clipboard?",
                 Buttons = {
                     {
                         Title = "Confirm",
                         Callback = function()
-                            print("Confirmed the dialog.")
+                            setclipboard("dsc.gg/prestine")
                         end
                     },
                     {
