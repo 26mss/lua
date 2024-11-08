@@ -6,7 +6,7 @@ local Window = Fluent:CreateWindow({
     Title = "Prestine Key's ",
     SubTitle = "by Ratet",
     TabWidth = 160,
-    Size = UDim2.fromOffset(880, 760),
+    Size = UDim2.fromOffset(880, 560),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Amethyst",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
@@ -21,6 +21,13 @@ local Tabs = {
 local Options = Fluent.Options
 
 do
+    Fluent:Notify({
+        Title = "Key System",
+        Content = "The Prestine Key system has Loaded",
+        Duration = 3 -- Set to nil to make the notification not disappear
+    })
+
+
 
     Tabs.Main:AddParagraph({
         Title = "Prestine Key Checking System",
@@ -30,8 +37,8 @@ do
 
 
     Tabs.Main:AddButton({
-        Title = "Button",
-        Description = "Very important button",
+        Title = "Discord",
+        Description = "Link to the discord",
         Callback = function()
             Window:Dialog({
                 Title = "",
@@ -54,40 +61,7 @@ do
         end
     })
 
-
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
-
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
-SaveManager:IgnoreThemeSettings()
-
--- You can add indexes of elements the save manager should ignore
-SaveManager:SetIgnoreIndexes({})
-
--- use case for doing it this way:
--- a script hub could have themes in a global folder
--- and game configs in a separate folder per game
-InterfaceManager:SetFolder("FluentScriptHub")
-SaveManager:SetFolder("FluentScriptHub/specific-game")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-
-Window:SelectTab(1)
-
-Fluent:Notify({
-    Title = "Fluent",
-    Content = "The script has been loaded.",
-    Duration = 8
-})
-
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
-SaveManager:LoadAutoloadConfig()
+    Input:OnChanged(function()
+        print("Input updated:", Input.Value)
+    end)
+end
